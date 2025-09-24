@@ -48,7 +48,8 @@ export default function ProductDetails() {
           .from('reviews')
           .select(`
             *,
-            profiles (
+            profile:profiles!fk_reviews_user(
+            id,
               full_name,
               avatar_url
             )
@@ -91,7 +92,7 @@ export default function ProductDetails() {
         .from('reviews')
         .select(`
           *,
-          profiles (
+          profile:profiles!fk_reviews_user (
             full_name,
             avatar_url
           )
@@ -104,7 +105,7 @@ export default function ProductDetails() {
       setNewReview({ rating: 0, comment: '' });
       toast.success('Review submitted successfully');
     } catch (error: any) {
-      toast.error('Failed to submit review');
+      toast.error('Failed to submit review'+ error.message);
     }
   };
 
@@ -200,12 +201,12 @@ export default function ProductDetails() {
               <div key={review.id} className="border-b pb-6">
                 <div className="flex items-center mb-2">
                   <img
-                    src={review.profiles.avatar_url || 'https://via.placeholder.com/40'}
-                    alt={review.profiles.full_name}
+                    src={review.profile?.avatar_url || 'https://via.placeholder.com/40'}
+                    alt={review.profile?.full_name}
                     className="w-10 h-10 rounded-full mr-3"
                   />
                   <div>
-                    <p className="font-medium">{review.profiles.full_name}</p>
+                    <p className="font-medium">{review.profile?.full_name}</p>
                     <div className="flex items-center">
                       {Array.from({ length: review.rating }).map((_, i) => (
                         <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
