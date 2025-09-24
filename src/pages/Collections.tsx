@@ -61,7 +61,7 @@ export default function Collections() {
           <div className="max-w-2xl px-8">
             <h1 className="text-5xl font-bold text-white mb-4">Our Collections</h1>
             <p className="text-xl text-pink-100">
-              Discover our carefully curated collections, each designed to bring out your unique style and personality.
+              Discover  carefully curated collections, each designed to bring out your unique style and personality.
             </p>
           </div>
         </div>
